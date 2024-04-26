@@ -107,18 +107,32 @@ struct Tree {
 
 	//удаление всех элементов
 	void clear() {
-		while (root != nullptr) {
-			Treenode* temp = root;
-			if (root->left != nullptr) {
-				root = root->left;
+		if (cnt == 0) {
+			return;
+		}
+		Treenode* parent = root;
+		Treenode* temp = root;
+		while (cnt > 0) {
+			while (temp->left != nullptr || temp->right != nullptr) {
+				parent = temp;
+				if (temp->left != nullptr) {
+					temp = temp->left;
+				}
+				else if (temp->right != nullptr) {
+					temp = temp->right;
+				}
 			}
-			else {
-				root = root->right;
+			if (parent->left == temp) {
+				parent->left = nullptr;
+			}
+			else if (parent->right == temp){
+				parent->right = nullptr;
 			}
 			delete temp;
+			cnt--;
+			temp = root;
 		}
 		root = nullptr;
-		cnt = 0;
 	}
 
 	//содержит ли дерево заданный элемент
@@ -158,7 +172,6 @@ int main()
 		}
 		tree.add(key);
 	}
-	cout << tree.count() << endl;
 	cout << "Введите числа для нахождения их в дереве. Для окончания ввода введите число 0." << endl;
 	while (true) {
 		cin >> check;
