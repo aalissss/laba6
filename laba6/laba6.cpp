@@ -38,7 +38,7 @@ struct Tree {
 						temp = temp->left;
 					}
 				}
-				else if (data >= temp->key) {
+				else if (data > temp->key) {
 					if (temp->right == nullptr) {
 						temp->right = new Treenode;
 						temp->right->key = data;
@@ -172,6 +172,7 @@ int main()
 		}
 		tree.add(key);
 	}
+	cout << tree.count() << endl;
 	cout << "Введите числа для нахождения их в дереве. Для окончания ввода введите число 0." << endl;
 	while (true) {
 		cin >> check;
