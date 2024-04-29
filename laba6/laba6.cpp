@@ -136,7 +136,7 @@ struct Tree {
 	}
 
 	//содержит ли дерево заданный элемент
-	bool containst(int data) {
+	bool contains(int data) {
 		Treenode* temp = root;
 		while (temp != nullptr) {
 			if (temp->key == data) {
@@ -172,14 +172,13 @@ int main()
 		}
 		tree.add(key);
 	}
-	cout << tree.count() << endl;
 	cout << "Введите числа для нахождения их в дереве. Для окончания ввода введите число 0." << endl;
 	while (true) {
 		cin >> check;
 		if (check == 0) {
 			break;
 		}
-		if (tree.containst(check)) {
+		if (tree.contains(check)) {
 			cout << "Это число есть в дереве!" << endl;
 		}
 		else {
