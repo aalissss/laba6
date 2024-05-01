@@ -63,27 +63,33 @@ struct Tree {
 		if (root == nullptr) {
 			return;
 		}
-		Treenode* parent = root;
+		Treenode* parent = nullptr;
 		Treenode* temp = root;
 		while (temp != nullptr) {
 			if (key < temp->key) {
 				parent = temp;
 				temp = temp->left;
 			}
-			else if(key >= temp -> key){
+			else if(key > temp -> key){
 				parent = temp;
 				temp = temp->right;
 			}
 			else {
-				if (temp->left != nullptr && temp->right != nullptr) {
+				if (temp->right != nullptr) {
 					Treenode* minimum = temp->right;
+					parent = temp;
 					while (minimum->left != nullptr) {
+						parent = minimum;
 						minimum = minimum->left;
+						if (minimum->right != nullptr && minimum->left == nullptr) {
+							parent = minimum;
+							minimum = minimum->right;
+						}
+						temp->key = minimum->key;
+						key = minimum->key;
+						temp = minimum;
 					}
-					temp->key = minimum->key;
-					key = minimum->key;
 				}
-
 				Treenode* child = nullptr;
 				if (temp->left != nullptr) {
 					child = temp->left;
