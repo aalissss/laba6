@@ -60,55 +60,53 @@ struct Tree {
 
 	//удаление элемента
 	void remove(int key) {
-		if (root == nullptr) {
-			return;
-		}
 		Treenode* parent = nullptr;
 		Treenode* temp = root;
 		while (temp != nullptr) {
-			if (key < temp->key) {
-				parent = temp;
-				temp = temp->left;
-			}
-			else if(key > temp -> key){
-				parent = temp;
-				temp = temp->right;
-			}
-			else {
-				if (temp->right != nullptr) {
-					Treenode* minimum = temp->right;
-					parent = temp;
-					while (minimum->left != nullptr) {
-						parent = minimum;
-						minimum = minimum->left;
-						if (minimum->right != nullptr && minimum->left == nullptr) {
-							parent = minimum;
-							minimum = minimum->right;
-						}
-						temp->key = minimum->key;
-						key = minimum->key;
-						temp = minimum;
-					}
-				}
-				Treenode* child = nullptr;
-				if (temp->left != nullptr) {
-					child = temp->left;
-				}
-				else {
-					child = temp->right;
-				}
-
-				if (parent->left == temp) {
-					parent->left = child;
-				}
-				else {
-					parent->right = child;
-				}
-				delete temp;
-				cnt--;
+			if (key == temp->key) {
 				break;
 			}
+			parent = temp;
+			if (key < temp->key) {
+				temp = temp->left;
+			}
+			if(key > temp -> key){
+				temp = temp->right;
+			}
 		}
+		if (temp == nullptr) {
+			return;
+		}
+		if ((temp->right != nullptr) && (temp->left != nullptr)) {
+			parent = temp;
+			Treenode* minimum = temp->right;
+			while (minimum->left != nullptr) {
+				parent = minimum;
+				minimum = minimum->left;
+			}
+			temp->key = minimum->key;
+			temp = minimum;
+		}
+		Treenode* child = nullptr;
+		if (temp->left != nullptr) {
+			child = temp->left;
+		}
+		else {
+			child = temp->left;
+		}
+		if (temp != root) {
+			if (parent->left == temp) {
+				parent->left = child;
+			}
+			if (parent->right == temp) {
+				parent->right = child;
+			}
+		}
+		else {
+			root = child;
+		}
+		delete temp;
+		cnt--;
 	}
 
 	//удаление всех элементов
