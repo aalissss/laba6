@@ -92,7 +92,7 @@ struct Tree {
 			child = temp->left;
 		}
 		else {
-			child = temp->left;
+			child = temp->right;
 		}
 		if (temp != root) {
 			if (parent->left == temp) {
