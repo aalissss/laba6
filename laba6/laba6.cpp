@@ -70,7 +70,7 @@ struct Tree {
 			if (key < temp->key) {
 				temp = temp->left;
 			}
-			if(key > temp -> key){
+			else if(key > temp -> key){
 				temp = temp->right;
 			}
 		}
@@ -98,7 +98,7 @@ struct Tree {
 			if (parent->left == temp) {
 				parent->left = child;
 			}
-			if (parent->right == temp) {
+			else if (parent->right == temp) {
 				parent->right = child;
 			}
 		}
