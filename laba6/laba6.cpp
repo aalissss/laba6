@@ -109,33 +109,20 @@ struct Tree {
 		cnt--;
 	}
 
-	//удаление всех элементов
-	void clear() {
-		if (cnt == 0) {
+	//функция удаления
+	void clear(Treenode* temp) {
+		if (temp == nullptr) {
 			return;
 		}
-		Treenode* parent = root;
-		Treenode* temp = root;
-		while (cnt > 0) {
-			while (temp->left != nullptr || temp->right != nullptr) {
-				parent = temp;
-				if (temp->left != nullptr) {
-					temp = temp->left;
-				}
-				else if (temp->right != nullptr) {
-					temp = temp->right;
-				}
-			}
-			if (parent->left == temp) {
-				parent->left = nullptr;
-			}
-			else if (parent->right == temp){
-				parent->right = nullptr;
-			}
-			delete temp;
-			cnt--;
-			temp = root;
-		}
+		clear(temp->left);
+		clear(temp->right);
+		delete temp;
+		cnt--;
+	}
+
+	//удаление всех элементов
+	void clear() {
+		clear(root);
 		root = nullptr;
 	}
 
