@@ -3,7 +3,7 @@ using namespace std;
 
 //узел дерева
 struct Treenode {
-	int key;
+	int key = 0;
 	Treenode* left = nullptr;
 	Treenode* right = nullptr;
 };
@@ -17,9 +17,7 @@ struct Tree {
 	void add(int data) {
 		if (root == nullptr) {
 			root = new Treenode;
-			root->key = data;
-			root->left = nullptr;
-			root->right = nullptr;
+			root -> key = data;
 			cnt++;
 		}
 		else {
@@ -29,8 +27,6 @@ struct Tree {
 					if (temp->left == nullptr) {
 						temp->left = new Treenode;
 						temp->left->key = data;
-						temp->left->left = nullptr;
-						temp->left->right = nullptr;
 						cnt++;
 						break;
 					}
@@ -42,8 +38,6 @@ struct Tree {
 					if (temp->right == nullptr) {
 						temp->right = new Treenode;
 						temp->right->key = data;
-						temp->right->left = nullptr;
-						temp->right->right = nullptr;
 						cnt++;
 						break;
 					}
